@@ -16,6 +16,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
         git \
         jq \
+        wget\
         libfreetype6-dev \
         libjpeg-dev \
         libicu-dev \
