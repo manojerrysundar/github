@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t svhs-cont-private-repository .
+      - docker build --no-cache -t svhs-cont-private-repository -f Dockerfile .
       - docker tag svhs-cont-private-repository:latest 391774975135.dkr.ecr.us-east-2.amazonaws.com/svhs-cont-private-repository:latest
 
   post_build:
