@@ -50,6 +50,7 @@ RUN apt-get install -y autoconf wget build-essential && \
     make && \
     make install && \
     echo "extension=redis.so" >> /usr/local/etc/php/php.ini-development && \
+    echo "extension=redis.so" >> /usr/local/etc/php/php.ini-production && \
     apt-get purge --autoremove -y autoconf wget build-essential && \
     cd .. && \
     rm redis-5.3.7.tgz && \
