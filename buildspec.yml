@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 391774975135.dkr.ecr.us-east-2.amazonaws.com
+
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t svhs-cont-private-repository .
+      - docker tag svhs-cont-private-repository:latest 391774975135.dkr.ecr.us-east-2.amazonaws.com/svhs-cont-private-repository:latest
+
+  post_build:
+    commands:
+      - echo Pushing Docker image to Amazon ECR...
+      - docker push 391774975135.dkr.ecr.us-east-2.amazonaws.com/svhs-cont-private-repository:latest
+      - echo Writing image definitions file...
+      - printf '[{"name":"%s","imageUri":"%s"}]' "$CONTAINER_NAME" "$ECR_REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION" > imagedefinitions.json
+
+artifacts:
+  files: imagedefinitions.json
