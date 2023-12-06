@@ -41,7 +41,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
  && docker-php-ext-install mysqli
 
 # Install PHP Redis
-RUN apt-get install -y autoconf wget build-essential --ignore-engines && \
+RUN apt-get install -y autoconf wget build-essential && \
     wget https://pecl.php.net/get/redis-5.3.7.tgz && \
     tar xzf redis-5.3.7.tgz && \
     cd redis-5.3.7 && \
